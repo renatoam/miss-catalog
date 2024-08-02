@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,8 +31,12 @@ public class ProductModel {
   private String description;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<ProductImageModel> images = new HashSet<>();
+
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+  private ProductSpecificationModel specification;
 
   public UUID getId() {
     return id;
