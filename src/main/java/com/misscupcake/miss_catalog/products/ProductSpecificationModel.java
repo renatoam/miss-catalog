@@ -14,7 +14,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "product_specification")
 public class ProductSpecificationModel {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;

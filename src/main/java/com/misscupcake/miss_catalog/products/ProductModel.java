@@ -38,6 +38,18 @@ public class ProductModel {
   @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
   private ProductSpecificationModel specification;
 
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+  private ProductPriceModel price;
+
+  public ProductPriceModel getPrice() {
+    return price;
+  }
+
+  public void setPrice(ProductPriceModel price) {
+    this.price = price;
+  }
+
   public UUID getId() {
     return id;
   }
@@ -68,5 +80,13 @@ public class ProductModel {
 
   public void setImages(Set<ProductImageModel> images) {
     this.images = images;
+  }
+
+  public ProductSpecificationModel getSpecification() {
+    return specification;
+  }
+
+  public void setSpecification(ProductSpecificationModel specification) {
+    this.specification = specification;
   }
 }
